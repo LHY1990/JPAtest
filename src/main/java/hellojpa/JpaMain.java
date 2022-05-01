@@ -16,25 +16,24 @@ public class JpaMain {
         EntityTransaction tx =em.getTransaction();
         tx.begin();
 
-        Member member = new Member();
-        member.setId(2L);
-        member.setName("helloB");
+        try {
+            Member member = new Member();
+            member.setId(2L);
+            member.setName("helloB");
 
-
-        em.persist(member);
-
-
-        tx.commit();
-        //모든 작업은 트랜젝션 안에서 작업해야한다.
-
-
-
-
-        em.close();
+            em.persist(member);
+            tx.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            //모든 작업은 트랜젝션 안에서 작업해야한다.
+            tx.rollback();
+        }finally {
+            em.close();
+        }
 
         emf.close();
 
-
+        //이렇게 구성하는것이 정석적인 모습이다.
 
     }
 }
