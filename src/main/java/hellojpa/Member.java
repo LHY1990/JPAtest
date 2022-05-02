@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity//@Table able(name="USER") 이 경우 USER 라는 테이블과 연결된다.
+
+//@Table(name="USER") 이 경우 USER 라는 테이블과 연결된다.기본적으로 클래스 이름을 쓴다.
+@Entity
 public class Member {
 
     @Id
