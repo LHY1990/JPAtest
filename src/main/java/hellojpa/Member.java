@@ -16,7 +16,8 @@ public class Member {
     @ManyToOne
     private Team team;
     //여기에 int나 Long형 자료형이 아닌  Team형태의 레퍼런스를 만든다.
-    //Team테이블의
+    //여기 까지만 구현한 경우 단방향 맵핑이 된다.
+    //주어 -> 목적 순으로 이해하면 @ManyToOne을 이해할듯
 
     public Long getId() {
         return id;

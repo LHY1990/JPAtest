@@ -109,17 +109,29 @@ public class JpaMain {
         //Member와 Team 엮어서 삽입하기
 
         try {
-            Team newTeam = new Team();
-            newTeam.setTeamId(3L);
-            newTeam.setName("새로운팀3");
-            em.persist(newTeam);
+//            Team newTeam = new Team();
+//            newTeam.setTeamId(3L);
+//            newTeam.setName("새로운팀3");
+//            em.persist(newTeam);
+//
+//            Member member = new Member();
+//            member.setName("일반회원3");
+//            member.setId(3L);
+//            member.setTeam(newTeam);
+//
+//            em.persist(member);
+//
+//            em.flush();
+//            em.clear();
 
-            Member member = new Member();
-            member.setName("일반회원3");
-            member.setId(3L);
-            member.setTeam(newTeam);
+            Member findMember = em.find(Member.class, 2l);
+            List<Member> members = findMember.getTeam().getMembers();
 
-            em.persist(member);
+            for(Member m : members){
+                System.out.println(m.getName());
+            }
+
+
 
             tx.commit();
         } catch (Exception e) {
