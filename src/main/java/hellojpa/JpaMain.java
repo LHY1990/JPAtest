@@ -87,29 +87,55 @@ public class JpaMain {
 
         
         //쿼리문으로 리스트 가져오기
-        try{
-            //이 경우 테이블에 쿼리개념이 아니라 객체에 쿼리를 한다는 개념에 가깝다
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(1) //시작지점
-                    .setMaxResults(10) //종료지점
-                    .getResultList(); //리스트로 반환
+//        try{
+//            //이 경우 테이블에 쿼리개념이 아니라 객체에 쿼리를 한다는 개념에 가깝다
+//            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+//                    .setFirstResult(1) //시작지점
+//                    .setMaxResults(10) //종료지점
+//                    .getResultList(); //리스트로 반환
+//
+//            for(Member member : result){
+//                System.out.println(member.getName());
+//            }
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }finally {
+//
+//        }
 
-            for(Member member : result){
-                System.out.println(member.getName());
-            }
 
-        }catch (Exception e){
+
+        //Member와 Team 엮어서 삽입하기
+
+        try {
+            Team newTeam = new Team();
+            newTeam.setTeamId(3L);
+            newTeam.setName("새로운팀3");
+            em.persist(newTeam);
+
+            Member member = new Member();
+            member.setName("일반회원3");
+            member.setId(3L);
+            member.setTeam(newTeam);
+
+            em.persist(member);
+
+            tx.commit();
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-
+            //모든 작업은 트랜젝션 안에서 작업해야한다.
+            tx.rollback();
+        } finally {
+            em.close();
         }
-
+        emf.close();
 
 
 
 
 
         //팩토리 종료
-        emf.close();
+//        emf.close();
     }
 }

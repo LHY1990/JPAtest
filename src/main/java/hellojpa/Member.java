@@ -1,9 +1,6 @@
 package hellojpa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 //@Table(name="USER") 이 경우 USER 라는 테이블과 연결된다.기본적으로 클래스 이름을 쓴다.
@@ -15,8 +12,22 @@ public class Member {
     //@Column(name="username") 이 경우 name필드는 username 컬럼과 연동
     private String name;
 
+    @JoinColumn(name = "team_id")
+    @ManyToOne
+    private Team team;
+    //여기에 int나 Long형 자료형이 아닌  Team형태의 레퍼런스를 만든다.
+    //Team테이블의
+
     public Long getId() {
         return id;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public void setId(Long id) {
