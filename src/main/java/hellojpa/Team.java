@@ -19,6 +19,7 @@ public class Team {
     private String name;
 
     //여기까지 구현해야 양방향이다.
+    //mappedBy 가 있기때문에 얘는 연관관계의 주인이 아니다.
     @OneToMany(mappedBy = "team")
     private List<Member> members= new ArrayList<>();
     //new로 객체를 넣어서 초기화까지가 관례이다.

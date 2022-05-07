@@ -18,6 +18,8 @@
             <property name="hibernate.format_sql" value="true"/>
             <!-- 쿼리 출력 시 주석(comments)도 함께 출력 -->
             <property name="hibernate.use_sql_comments" value="true"/>
+            <!--테이블 자동생성 여부. 실제 앱 작동시엔 사용하지 않는다.-->
+            <property name="spring.jpa.hibernate.ddl-auto" value="create"/>
         </properties>
 
 
